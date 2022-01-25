@@ -1,9 +1,7 @@
 package com.application.modul3.book;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,13 +46,24 @@ public class BookService {
 		return bookUpdate;
 	}
 
-	public List<Book> findByTitle(String title) {
-		List<Book> listBookByTitle = new ArrayList<>();
-				
-		listBookByTitle.addAll(bookRepository.findByTitle(title));
-		
-		return listBookByTitle;
-
+	
+//	public List<Book> findByTitle(String title) {
+//		List<Book> listBooks = bookRepository.findAll();
+//		List<Book> bookByTitle = new ArrayList<>();
+//		for (int i = 0; i < listBooks.size(); i++) {
+//			if (listBooks.get(i).getTitleBook().equals(title)) {
+//				bookByTitle.add(listBooks.get(i));		
+//				//bookRepository.;
+//			}		
+//		}		
+//		System.out.println(bookByTitle);
+//		
+//		return bookByTitle;
+//	}
+	
+	// find a book by title
+	public List<Book> getBookByTitle(String title) {
+		return bookRepository.findByTitle(title);
 	}
 
 }
