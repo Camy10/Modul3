@@ -11,28 +11,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-enum Gender{
-	FEMALE,
-    MALE,
-}
+import com.application.modul3.gender.Gender;
+
 @Entity
 @Table(name = "author", schema = "administration")
 public class Author {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
-	@Column(name= "birth_date")
+
+	@Column(name = "birth_date")
 	private LocalDate birthDate;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
 	private Gender gender;
-	
+
 	@Column(name = "death_date")
 	private LocalDate deathDate;
 
@@ -75,6 +73,5 @@ public class Author {
 	public void setDeathDate(String deathDate) {
 		this.deathDate = LocalDate.parse(deathDate);
 	}
-	
 
 }

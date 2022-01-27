@@ -18,39 +18,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
-	
+
+	// CRUD
+	/*
+	 * Create Read Update Delete
+	 */
 	@PostMapping
 	public Author createAuthor(@RequestBody Author author) {
 		return authorService.createAuthor(author);
 	}
-	
+
 	@GetMapping("/list")
-	public List<Author> getAllAuthor(){
+	public List<Author> getAllAuthor() {
 		return authorService.getAllAuthor();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Author getAuthorById(@PathVariable Integer id) {
 		return authorService.getAuthorById(id);
 	}
-	
+
+	@PutMapping("/{id}")
+	public Author updateAuthor(@RequestBody Author author, @PathVariable Integer id) {
+		return authorService.updateAuthorById(author, id);
+	}
+
 	@DeleteMapping("/{id}")
 	public void deleteAuthorById(@PathVariable Integer id) {
 		authorService.deleteAuthorById(id);
 	}
-	
-	@PutMapping("/{id}")
-	public Author updateAuthor(@RequestBody Author author,@PathVariable Integer id) {
-		return authorService.updateAuthorById(author, id);
-	}
-	
+
 	@GetMapping("/byName")
-	public Author getAtuthorByname(@RequestParam String name) {
+	public Author getAuthorByname(@RequestParam String name) {
 		return authorService.getAuthorByName(name);
 	}
-	
+
 	@GetMapping("/live")
-	public List<Author> getAuthorWhoLive(){
+	public List<Author> getAuthorWhoLive() {
 		return authorService.getAuthorWhoLive();
 	}
 
