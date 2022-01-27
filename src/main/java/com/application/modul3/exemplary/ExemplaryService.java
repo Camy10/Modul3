@@ -18,6 +18,7 @@ public class ExemplaryService {
 	@Autowired
 	private BookService bookService;
 	
+	
 	public Exemplary createExemplary(Integer bookId, Exemplary exemplary) {
 		Book book= bookService.getBookById(bookId);
 		book.addExemplary(exemplary);
@@ -36,7 +37,7 @@ public class ExemplaryService {
 		return null;
 	}
 	
-	//nu e testat
+	
 	public void deleteExemplaryById(Integer id) {
 		exemplaryRepository.deleteById(id);
 	}
@@ -49,6 +50,7 @@ public class ExemplaryService {
 		updateExemplary.setPageNumbers(exemplary.getPageNumbers());
 		updateExemplary.setBook(exemplary.getBook());
 		exemplaryRepository.flush();
+		
 		return updateExemplary;	
 	}
 	

@@ -34,11 +34,12 @@ public class ExemplaryController {
 		return exemplaryService.getExemplaryById(id);	
 	}
 	
-	//nu e testat
+	
 	@DeleteMapping("/delete/{id}")
 	public void deleteExemplaryById(@PathVariable Integer id) {
 		exemplaryService.deleteExemplaryById(id);
 	}
+	
 	
 	@PutMapping("/{id}")
 	public Exemplary updateExemplary(@RequestBody Exemplary exemplary, @PathVariable Integer id) {
