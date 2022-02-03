@@ -38,16 +38,6 @@ public class AuthorController {
 		return authorService.getAuthorById(id);
 	}
 
-	@PutMapping("/{id}")
-	public Author updateAuthor(@RequestBody Author author, @PathVariable Integer id) {
-		return authorService.updateAuthorById(author, id);
-	}
-
-	@DeleteMapping("/{id}")
-	public void deleteAuthorById(@PathVariable Integer id) {
-		authorService.deleteAuthorById(id);
-	}
-
 	@GetMapping("/byName")
 	public Author getAuthorByname(@RequestParam String name) {
 		return authorService.getAuthorByName(name);
@@ -56,6 +46,16 @@ public class AuthorController {
 	@GetMapping("/live")
 	public List<Author> getAuthorWhoLive() {
 		return authorService.getAuthorWhoLive();
+	}
+
+	@PutMapping("/{id}")
+	public Author updateAuthor(@RequestBody Author author, @PathVariable Integer id) {
+		return authorService.updateAuthorById(author, id);
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteAuthorById(@PathVariable Integer id) {
+		authorService.deleteAuthorById(id);
 	}
 
 }

@@ -2,7 +2,6 @@ package com.application.modul3.exemplary;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,29 +12,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.application.modul3.book.Book;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "exemplary", schema = "administration" )
+@Table(name = "exemplary", schema = "administration")
 public class Exemplary {
-	
+
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "date")
 	private LocalDate date;
-	
+
 	@Column(name = "code")
 	private String code;
-	
+
 	@Column(name = "page_numbers")
 	private Integer pageNumbers;
-	
-	//entitatea copil
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	// entitatea copil
+	@ManyToOne()
 	@JoinColumn(name = "book_id")
-	@JsonIgnoreProperties("exemplaries")
+	// @JsonIgnoreProperties("exemplaries")
 	private Book book;
 
 	public Integer getId() {
@@ -77,6 +76,5 @@ public class Exemplary {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
 
 }

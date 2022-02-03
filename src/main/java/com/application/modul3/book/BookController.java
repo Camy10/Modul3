@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.application.modul3.book.dto.BookDTO;
+import com.application.modul3.book.mapper.BookMapper;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -20,19 +23,23 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private BookMapper bookMapper;
+
 	@PostMapping
-	public Book createBook(@RequestBody Book book) {
-		return bookService.createBook(book);
+	public BookDTO createBook(@RequestBody BookDTO bookDTO) {
+		Book createBook = bookService.createBook(bookMapper.bookDTO2Book(bookDTO));
+		return bookMapper.book2BookDTO(createBook);
 	}
 
 	@GetMapping("/list")
-	public List<Book> getAllBook() {
-		return bookService.getAllBooks();
+	public List<BookDTO> getAllBook() {
+		return bookMapper.bookList2BookListDTO(bookService.getAllBooks());
 	}
 
-	@GetMapping("/id={id}")
-	public Book getBookById(@PathVariable Integer id) {
-		return bookService.getBookById(id);
+	@GetMapping("/{id}")
+	public BookDTO getBookById(@PathVariable Integer id) {
+		return bookMapper.book2BookDTO(bookService.getBookById(id));
 	}
 
 	@DeleteMapping("/{id}")
@@ -44,10 +51,10 @@ public class BookController {
 	public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
 		return bookService.updateBook(book, id);
 	}
-	
+
 	@GetMapping("/title/name")
-	public  List<Book>  getBookByTitle(@RequestParam String title) {
-		return  bookService.getBookByTitle(title);
+	public List<BookDTO> getBookByTitle(@RequestParam String title) {
+		return bookMapper.bookList2BookListDTO(bookService.getBookByTitle(title));
 	}
 
 }

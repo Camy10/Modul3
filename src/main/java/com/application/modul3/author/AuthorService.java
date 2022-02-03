@@ -38,9 +38,10 @@ public class AuthorService {
 	public Author updateAuthorById(Author author, Integer id) {
 		Author updateAuthor = getAuthorById(id);
 		updateAuthor.setName(author.getName());
-		updateAuthor.setBirthDate(String.valueOf(author.getBirthDate()));
+		updateAuthor.setBirthDate(author.getBirthDate());
 		updateAuthor.setGender(author.getGender());
-		updateAuthor.setDeathDate(String.valueOf(author.getDeathDate()));
+		updateAuthor.setDeathDate(author.getDeathDate());
+		updateAuthor.setNationality(author.getNationality());
 		authorRepository.flush();
 		return updateAuthor;
 	}

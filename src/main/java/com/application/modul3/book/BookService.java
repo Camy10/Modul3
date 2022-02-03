@@ -40,27 +40,12 @@ public class BookService {
 	public Book updateBook(Book book, Integer id) {
 		Book bookUpdate = getBookById(id);
 		bookUpdate.setTitleBook(book.getTitleBook());
-		bookUpdate.setYearBook(String.valueOf(book.getYearBook()));
+		bookUpdate.setYearBook(book.getYearBook());
 		bookUpdate.setIsbnBook(book.getIsbnBook());
 		bookRepository.flush();
 		return bookUpdate;
 	}
 
-	
-//	public List<Book> findByTitle(String title) {
-//		List<Book> listBooks = bookRepository.findAll();
-//		List<Book> bookByTitle = new ArrayList<>();
-//		for (int i = 0; i < listBooks.size(); i++) {
-//			if (listBooks.get(i).getTitleBook().equals(title)) {
-//				bookByTitle.add(listBooks.get(i));		
-//				//bookRepository.;
-//			}		
-//		}		
-//		System.out.println(bookByTitle);
-//		
-//		return bookByTitle;
-//	}
-	
 	// find a book by title
 	public List<Book> getBookByTitle(String title) {
 		return bookRepository.findByTitle(title);

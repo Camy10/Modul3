@@ -34,6 +34,9 @@ public class Author {
 	@Column(name = "death_date")
 	private LocalDate deathDate;
 
+	@Column(name = "nationality")
+	private String nationality;
+
 	public Integer getId() {
 		return id;
 	}
@@ -54,8 +57,8 @@ public class Author {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
-		this.birthDate = LocalDate.parse(birthDate);
+	public void setBirthDate(LocalDate date) {
+		this.birthDate = date;
 	}
 
 	public Gender getGender() {
@@ -70,8 +73,16 @@ public class Author {
 		return deathDate;
 	}
 
-	public void setDeathDate(String deathDate) {
-		this.deathDate = LocalDate.parse(deathDate);
+	public void setDeathDate(LocalDate date) {
+		this.deathDate = date;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
 	}
 
 }
