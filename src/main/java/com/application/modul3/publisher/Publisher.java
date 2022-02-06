@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.application.modul3.book.Book;
+import com.application.modul3.exemplary.Exemplary;
 
 @Entity
 @Table(name = "publisher", schema = "administration")
@@ -66,5 +67,8 @@ public class Publisher {
 		this.books.add(book);
 		book.addPublisher(this);
 	}
+
+	
+	
 
 }

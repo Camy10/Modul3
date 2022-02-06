@@ -23,6 +23,14 @@ public class ExemplaryController {
 
 	@Autowired
 	private ExemplaryMapper exemplaryMapper;
+	// add un exemplar la editura cu id
+		@PostMapping("/add-publisher/{publisherId}/{bookId}")
+		public ExemplaryDTO createExemplarWhitPublisher(@PathVariable Integer publisherId, @PathVariable Integer bookId, @RequestBody ExemplaryDTO exemplaryDTO) {
+			Exemplary createExemplary = exemplaryService.createExemplarWithPublisher(publisherId, bookId,
+					exemplaryMapper.exemplaryDTO2Exemplary(exemplaryDTO));
+			return exemplaryMapper.exemplary2ExemplaryDTO(createExemplary);
+		}
+	
 
 	// add un exemplar la cartea cu id
 	@PostMapping("/add/{bookId}")

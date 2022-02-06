@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.application.modul3.book.Book;
 import com.application.modul3.book.BookService;
+import com.application.modul3.publisher.Publisher;
+import com.application.modul3.publisher.PublisherService;
 
 
 
@@ -17,11 +19,24 @@ public class ExemplaryService {
 
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private PublisherService publisherService;
 
+	//la un exemplar add o carte
 	public Exemplary createExemplary(Integer bookId, Exemplary exemplary) {
 		Book book = bookService.getBookById(bookId);
 		book.addExemplary(exemplary);
 		return exemplaryRepository.saveAndFlush(exemplary);
+	}
+	
+	//la un exemplar set o editura
+	public Exemplary createExemplarWithPublisher(Integer publisherId, Integer bookId, Exemplary exemplary) {
+		Book book = bookService.getBookById(bookId);	
+		Publisher publiser = publisherService.getPublisherById(publisherId);
+		book.addExemplary(exemplary);
+		exemplary.setPublisher(publiser);
+		return exemplaryRepository.saveAndFlush(exemplary);	
 	}
 
 	public void deleteExemplary(Integer ExemplaryId) {

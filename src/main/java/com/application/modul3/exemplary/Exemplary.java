@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.application.modul3.book.Book;
+import com.application.modul3.publisher.Publisher;
 
 @Entity
 @Table(name = "exemplary", schema = "administration")
@@ -36,6 +37,10 @@ public class Exemplary {
 	@JoinColumn(name = "book_id")
 	// @JsonIgnoreProperties("exemplaries")
 	private Book book;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_editura")
+	private Publisher publisher;
 
 	public Integer getId() {
 		return id;
@@ -77,4 +82,14 @@ public class Exemplary {
 		this.book = book;
 	}
 
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+	
+
+	
 }
