@@ -13,11 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.application.modul3.book.Book;
+
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
+
+	// incercare
+	@PostMapping("/book-author/{bookID}")
+	public Author createBookAuthor(@RequestBody Author author,  @PathVariable Integer bookID) {
+
+		return authorService.createBookAuthor(author, bookID);
+
+	}
 
 	// CRUD
 	/*

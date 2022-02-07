@@ -39,7 +39,7 @@ public class Exemplary {
 	private Book book;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_editura")
+	@JoinColumn(name = "publisher_id")
 	private Publisher publisher;
 
 	public Integer getId() {

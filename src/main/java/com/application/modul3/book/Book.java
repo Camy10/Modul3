@@ -14,9 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import com.application.modul3.author.Author;
 import com.application.modul3.exemplary.Exemplary;
-import com.application.modul3.publisher.Publisher;
 
 @Entity
 @Table(name = "book", schema = "administration")
@@ -41,11 +40,9 @@ public class Book {
 	// @JsonIgnoreProperties("book")
 	private Set<Exemplary> exemplaries;
 
-	@ManyToMany
-	@JoinTable(name = "publisher_book", joinColumns = {
-			@JoinColumn(name = "book_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "publisher_id", referencedColumnName = "id") })
-	private Set<Publisher> publishers;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
+	private Set<Author> authors;
 
 	public Integer getId() {
 		return id;
@@ -99,17 +96,32 @@ public class Book {
 		this.exemplaries = exemplaries;
 	}
 
-	public Set<Publisher> getPublishers() {
-		return publishers;
+	// incercare
+	public void addAuthor(Author author) {
+		this.authors.add(author);
+		author.getBooks().add(this);
+		//author.addBook(this);	
 	}
 
-	public void setPublishers(Set<Publisher> publishers) {
-		this.publishers = publishers;
+	public Set<Author> getAuthors() {
+		return authors;
 	}
 
-	public void addPublisher(Publisher pblisher) {
-		this.publishers.add(pblisher);
-
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
 	}
+
+//	public Set<Publisher> getPublishers() {
+//		return publishers;
+//	}
+//
+//	public void setPublishers(Set<Publisher> publishers) {
+//		this.publishers = publishers;
+//	}
+//
+//	public void addPublisher(Publisher pblisher) {
+//		this.publishers.add(pblisher);
+//
+//	}
 
 }

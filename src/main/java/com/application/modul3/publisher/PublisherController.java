@@ -30,10 +30,10 @@ public class PublisherController {
 		return publisherMapper.publisher2PublisherDTO(createPublisher);
 	}
 
-	@PostMapping("/add/book/{bookId}/{publisherId}")
-	public void setPublisher(@PathVariable Integer bookId, @PathVariable Integer publisherId) {
-		publisherService.setPublisherBook(publisherId, bookId);
-	}
+//	@PostMapping("/add/book/{bookId}/{publisherId}")
+//	public void setPublisher(@PathVariable Integer bookId, @PathVariable Integer publisherId) {
+//		publisherService.setPublisherBook(publisherId, bookId);
+//	}
 
 	@GetMapping("/list")
 	public List<PublisherDTO> getAllPublisher() {

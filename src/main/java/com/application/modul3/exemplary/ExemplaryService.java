@@ -9,34 +9,31 @@ import com.application.modul3.book.BookService;
 import com.application.modul3.publisher.Publisher;
 import com.application.modul3.publisher.PublisherService;
 
-
-
 @Service
 public class ExemplaryService {
 
 	@Autowired
 	private ExemplaryRepository exemplaryRepository;
-
 	@Autowired
 	private BookService bookService;
-	
 	@Autowired
 	private PublisherService publisherService;
 
-	//la un exemplar add o carte
-	public Exemplary createExemplary(Integer bookId, Exemplary exemplary) {
+	// la un exemplar add o carte si setez o editura
+	public Exemplary createExemplary(Integer bookId, Integer publisherId, Exemplary exemplary) throws Exception {
 		Book book = bookService.getBookById(bookId);
-		book.addExemplary(exemplary);
-		return exemplaryRepository.saveAndFlush(exemplary);
-	}
-	
-	//la un exemplar set o editura
-	public Exemplary createExemplarWithPublisher(Integer publisherId, Integer bookId, Exemplary exemplary) {
-		Book book = bookService.getBookById(bookId);	
+		if (book == null) {
+			throw new Exception("Book with id " + bookId + " was not found");
+		}
 		Publisher publiser = publisherService.getPublisherById(publisherId);
+
+		// one to many + many to one (bidirectional)
 		book.addExemplary(exemplary);
+
+		// doar many to one (doar exemplatul stie ce editura are, nu si invers)
 		exemplary.setPublisher(publiser);
-		return exemplaryRepository.saveAndFlush(exemplary);	
+
+		return exemplaryRepository.saveAndFlush(exemplary);
 	}
 
 	public void deleteExemplary(Integer ExemplaryId) {
@@ -50,6 +47,11 @@ public class ExemplaryService {
 		 * administartion.exemplary INNER JOIN administration.book ON exemplary.book_id
 		 * = book.id WHERE book.id = :bookId
 		 */
+	}
+	
+	public List<Exemplary> findExemplaryByPublisherId(Integer publisherId){
+		return exemplaryRepository.findExemplariesByPublisherId(publisherId);
+		
 	}
 
 	public List<Exemplary> getAllExemplary() {

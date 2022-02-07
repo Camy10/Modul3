@@ -20,12 +20,12 @@ public class PublisherService {
 		return publisherRepository.saveAndFlush(publisher);
 	}
 
-	public void setPublisherBook(Integer bookId, Integer publisherId) {
-		Book book = bookService.getBookById(bookId);
-		Publisher publisher = getPublisherById(publisherId);
-		publisher.addBook(book);
-		publisherRepository.saveAndFlush(publisher);
-	}
+//	public void setPublisherBook(Integer bookId, Integer publisherId) {
+//		Book book = bookService.getBookById(bookId);
+//		Publisher publisher = getPublisherById(publisherId);
+//		publisher.addBook(book);
+//		publisherRepository.saveAndFlush(publisher);
+//	}
 
 	public List<Publisher> getAllPublisher() {
 		return publisherRepository.findAll();

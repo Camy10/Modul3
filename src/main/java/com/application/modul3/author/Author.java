@@ -1,7 +1,9 @@
 package com.application.modul3.author;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,8 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.application.modul3.book.Book;
 import com.application.modul3.gender.Gender;
 
 @Entity
@@ -36,6 +40,9 @@ public class Author {
 
 	@Column(name = "nationality")
 	private String nationality;
+
+	@ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+	private Set<Book> books;
 
 	public Integer getId() {
 		return id;
@@ -83,6 +90,21 @@ public class Author {
 
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
+	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+
+	}
+
+	// incercare
+	public void addBook(Book book) {
+		this.books.add(book);
+
 	}
 
 }

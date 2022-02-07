@@ -28,8 +28,6 @@ public class Publisher {
 	@Column(name = "address")
 	private String address;
 
-	@ManyToMany(mappedBy = "publishers", cascade = CascadeType.ALL)
-	private Set<Book> books;
 
 	public Integer getId() {
 		return id;
@@ -55,18 +53,18 @@ public class Publisher {
 		this.address = address;
 	}
 
-	public Set<Book> getBooks() {
-		return books;
-	}
-
-	public void setBooks(Set<Book> books) {
-		this.books = books;
-	}
-
-	public void addBook(Book book) {
-		this.books.add(book);
-		book.addPublisher(this);
-	}
+//	public Set<Book> getBooks() {
+//		return books;
+//	}
+//
+//	public void setBooks(Set<Book> books) {
+//		this.books = books;
+//	}
+//
+//	public void addBook(Book book) {
+//		this.books.add(book);
+//		book.addPublisher(this);
+//	}
 
 	
 	

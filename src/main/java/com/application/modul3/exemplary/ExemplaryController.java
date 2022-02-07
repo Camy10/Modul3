@@ -2,6 +2,8 @@ package com.application.modul3.exemplary;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,27 +25,35 @@ public class ExemplaryController {
 
 	@Autowired
 	private ExemplaryMapper exemplaryMapper;
-	// add un exemplar la editura cu id
-		@PostMapping("/add-publisher/{publisherId}/{bookId}")
-		public ExemplaryDTO createExemplarWhitPublisher(@PathVariable Integer publisherId, @PathVariable Integer bookId, @RequestBody ExemplaryDTO exemplaryDTO) {
-			Exemplary createExemplary = exemplaryService.createExemplarWithPublisher(publisherId, bookId,
-					exemplaryMapper.exemplaryDTO2Exemplary(exemplaryDTO));
-			return exemplaryMapper.exemplary2ExemplaryDTO(createExemplary);
-		}
-	
 
-	// add un exemplar la cartea cu id
-	@PostMapping("/add/{bookId}")
-	public ExemplaryDTO createExemplary(@PathVariable Integer bookId, @RequestBody ExemplaryDTO exemplaryDTO) {
-		Exemplary createExemplary = exemplaryService.createExemplary(bookId,
-				exemplaryMapper.exemplaryDTO2Exemplary(exemplaryDTO));
-		return exemplaryMapper.exemplary2ExemplaryDTO(createExemplary);
+
+	// la exemplar creat ii add o cartea si o editura
+	@PostMapping("/add/{bookId}/{publisherId}")
+	public ResponseEntity<Object> createExemplary(@PathVariable Integer bookId, @PathVariable Integer publisherId,
+			@RequestBody ExemplaryDTO exemplaryDTO) {
+		try {
+			Exemplary createExemplary = exemplaryService.createExemplary(bookId, publisherId,
+					exemplaryMapper.exemplaryDTO2Exemplary(exemplaryDTO));
+			return ResponseEntity.ok(exemplaryMapper.exemplary2ExemplaryDTO(createExemplary));
+			// return new
+			// ResponseEntity<>(exemplaryMapper.exemplary2ExemplaryDTO(createExemplary),
+			// HttpStatus.OK) ;
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
 	}
 
 	// obtin toate exemplare ptr o carte ce are id =?
 	@GetMapping("/list/{bookId}")
 	public List<ExemplaryDTO> findExemplaryByBookId(@PathVariable Integer bookId) {
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(exemplaryService.findExemplariesByBookId(bookId));
+	}
+	
+	@GetMapping("/list/publisher/{publisherId}")
+	public List<ExemplaryDTO> findExemplaryByPublisgerId(@PathVariable Integer publisherId){
+		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(exemplaryService.findExemplaryByPublisherId(publisherId));
+		
 	}
 
 	@DeleteMapping("/delete/{exemplaryId}")
