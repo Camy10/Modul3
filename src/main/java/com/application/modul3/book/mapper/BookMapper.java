@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.application.modul3.book.Book;
+import com.application.modul3.book.dto.BookCreateDTO;
 import com.application.modul3.book.dto.BookDTO;
 
 @Service
@@ -22,6 +23,14 @@ public class BookMapper {
 	}
 	
 	public Book bookDTO2Book(BookDTO bookDTO) {
+		Book book = new Book();
+		book.setTitleBook(bookDTO.getTitle());
+		book.setYearBook(bookDTO.getYear());
+		book.setIsbnBook(bookDTO.getIsbn());
+		return book;		
+	}
+	
+	public Book bookCreateDTO2Book(BookCreateDTO bookDTO) {
 		Book book = new Book();
 		book.setTitleBook(bookDTO.getTitle());
 		book.setYearBook(bookDTO.getYear());

@@ -3,7 +3,6 @@ package com.application.modul3.author;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -41,7 +40,7 @@ public class Author {
 	@Column(name = "nationality")
 	private String nationality;
 
-	@ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "authors")
 	private Set<Book> books;
 
 	public Integer getId() {

@@ -1,6 +1,7 @@
 package com.application.modul3.book;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,9 +41,9 @@ public class Book {
 	// @JsonIgnoreProperties("book")
 	private Set<Exemplary> exemplaries;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
-	private Set<Author> authors;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "author_book", schema="administration", joinColumns = @JoinColumn(name = "book_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
+	private Set<Author> authors = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -100,7 +101,7 @@ public class Book {
 	public void addAuthor(Author author) {
 		this.authors.add(author);
 		author.getBooks().add(this);
-		//author.addBook(this);	
+		// author.addBook(this);
 	}
 
 	public Set<Author> getAuthors() {

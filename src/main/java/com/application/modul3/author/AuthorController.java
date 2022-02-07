@@ -21,13 +21,13 @@ public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
 
-	// incercare
-	@PostMapping("/book-author/{bookID}")
-	public Author createBookAuthor(@RequestBody Author author,  @PathVariable Integer bookID) {
-
-		return authorService.createBookAuthor(author, bookID);
-
-	}
+//	// incercare
+//	@PostMapping("/book-author/{bookID}")
+//	public Author createBookAuthor(@RequestBody Author author,  @PathVariable Integer bookID) {
+//
+//		return authorService.createBookAuthor(author, bookID);
+//
+//	}
 
 	// CRUD
 	/*
