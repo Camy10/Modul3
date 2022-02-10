@@ -1,15 +1,23 @@
 package com.application.modul3.book.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.application.modul3.author.mapper.AuthorMapper;
 import com.application.modul3.book.Book;
+import com.application.modul3.book.dto.BookAuthorDTO;
 import com.application.modul3.book.dto.BookCreateDTO;
 import com.application.modul3.book.dto.BookDTO;
+import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
 @Service
 public class BookMapper {
 	//@Autowired ExemplaryMapper exemplaryMapper;
+	@Autowired AuthorMapper authorMapper;
 	
 	//metoda returneaza un bookDTO,  mapeaza din book in bookDTO
 	public BookDTO book2BookDTO(Book book) {
@@ -35,6 +43,8 @@ public class BookMapper {
 		book.setTitleBook(bookDTO.getTitle());
 		book.setYearBook(bookDTO.getYear());
 		book.setIsbnBook(bookDTO.getIsbn());
+	
+		
 		return book;		
 	}
 	
@@ -51,6 +61,27 @@ public class BookMapper {
 //		return bookListDTO;
 	}
 	
+	
+
+	public BookCreateDTO book2BookCreateDTO(Book book) {
+		BookCreateDTO bookCreateDTO = new BookCreateDTO();
+		bookCreateDTO.setId(book.getId());
+		bookCreateDTO.setTitle(book.getTitleBook());
+		bookCreateDTO.setIsbn(book.getIsbnBook());
+		bookCreateDTO.setYear(book.getYearBook());
+		bookCreateDTO.setAuthorIds(book.getAuthorsIDS());
+		return bookCreateDTO;
+	}
+	
+	public BookAuthorDTO book2BookAuthorsDTO(Book book) {
+		BookAuthorDTO bookAuthorsDTO = new BookAuthorDTO();
+		bookAuthorsDTO.setId(book.getId());
+		bookAuthorsDTO.setTitle(book.getTitleBook());
+		bookAuthorsDTO.setIsbn(book.getIsbnBook());
+		bookAuthorsDTO.setYear(book.getYearBook());
+		bookAuthorsDTO.setAuthorsDTO(authorMapper.authorList2AuthorListDTO( new ArrayList<>(book.getAuthors())));
+		return bookAuthorsDTO;
+	}
 
 
 }

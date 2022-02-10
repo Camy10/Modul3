@@ -2,6 +2,7 @@ package com.application.modul3.book;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.application.modul3.author.Author;
 import com.application.modul3.exemplary.Exemplary;
+
+import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
 
 @Entity
 @Table(name = "book", schema = "administration")
@@ -42,7 +45,7 @@ public class Book {
 	private Set<Exemplary> exemplaries;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "author_book", schema="administration", joinColumns = @JoinColumn(name = "book_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
+	@JoinTable(name = "author_book", schema = "administration", joinColumns = @JoinColumn(name = "book_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
 	private Set<Author> authors = new HashSet<>();
 
 	public Integer getId() {
@@ -108,8 +111,18 @@ public class Book {
 		return authors;
 	}
 
+	
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
+	}
+	
+	//obtin id autorilor de la o carte 
+	public Set<Integer> getAuthorsIDS() {
+		Set<Integer> set = new HashSet<>();
+		for (Author author : authors) {
+			set.add(author.getId());
+		}
+		return set;
 	}
 
 //	public Set<Publisher> getPublishers() {

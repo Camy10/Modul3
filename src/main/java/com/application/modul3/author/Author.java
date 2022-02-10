@@ -1,6 +1,7 @@
 package com.application.modul3.author;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -103,7 +104,13 @@ public class Author {
 	// incercare
 	public void addBook(Book book) {
 		this.books.add(book);
-
 	}
 
+	public Set<Integer> getBookIDS(){
+		Set<Integer> bookIds = new HashSet<>();
+		for (Book book : books) {
+			bookIds.add(book.getId());		
+		}
+		return bookIds;
+	}
 }

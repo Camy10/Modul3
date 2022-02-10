@@ -12,35 +12,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.application.modul3.book.Book;
+import com.application.modul3.author.dto.AuthorDTO;
+import com.application.modul3.author.mapper.AuthorMapper;
 
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
-
-//	// incercare
-//	@PostMapping("/book-author/{bookID}")
-//	public Author createBookAuthor(@RequestBody Author author,  @PathVariable Integer bookID) {
-//
-//		return authorService.createBookAuthor(author, bookID);
-//
-//	}
-
+	private AuthorMapper authorMapper;
 	// CRUD
 	/*
 	 * Create Read Update Delete
 	 */
+
 	@PostMapping
 	public Author createAuthor(@RequestBody Author author) {
 		return authorService.createAuthor(author);
 	}
 
+//	@PostMapping
+//	public AuthorDTO createAuthor(@RequestBody AuthorCreateDTO authorCreateDTO) {
+//		Author author = authorService.createAuthor(authorMapper.authorCreateDTO2Author(authorCreateDTO), authorCreateDTO.getBooksId());
+//		return authorMapper.author2AuthorDTO(author);
+//		//return authorService.createAuthor(author);
+//	}
+
 	@GetMapping("/list")
 	public List<Author> getAllAuthor() {
 		return authorService.getAllAuthor();
+
 	}
 
 	@GetMapping("/{id}")
