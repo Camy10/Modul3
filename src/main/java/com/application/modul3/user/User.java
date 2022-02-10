@@ -1,10 +1,17 @@
 package com.application.modul3.user;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.application.modul3.Appointment.Appointment;
 
 
 @Entity //annotation ce indica ca, clasa este o entity 
@@ -26,6 +33,11 @@ public class User {
 	
 	@Column(name = "address")
 	private String address;
+	
+	@OneToMany(mappedBy = "", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REMOVE }, orphanRemoval = true)
+	private Set<Appointment> appointments = new HashSet<>();
+	
 	
 	public Integer getId() {
 		return id;
@@ -56,6 +68,12 @@ public class User {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 	
 	

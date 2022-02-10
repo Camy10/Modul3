@@ -41,7 +41,6 @@ public class Book {
 	// entitatea parinte
 	@OneToMany(mappedBy = "book", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
-	// @JsonIgnoreProperties("book")
 	private Set<Exemplary> exemplaries;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -111,12 +110,11 @@ public class Book {
 		return authors;
 	}
 
-	
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
-	
-	//obtin id autorilor de la o carte 
+
+	// obtin id autorilor de la o carte
 	public Set<Integer> getAuthorsIDS() {
 		Set<Integer> set = new HashSet<>();
 		for (Author author : authors) {

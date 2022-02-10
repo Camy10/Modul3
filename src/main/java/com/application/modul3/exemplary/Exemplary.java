@@ -1,7 +1,10 @@
 package com.application.modul3.exemplary;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.application.modul3.Appointment.Appointment;
 import com.application.modul3.book.Book;
 import com.application.modul3.publisher.Publisher;
 
@@ -41,6 +46,10 @@ public class Exemplary {
 	@ManyToOne
 	@JoinColumn(name = "publisher_id")
 	private Publisher publisher;
+	
+	@OneToMany(mappedBy = "exemplary", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REMOVE }, orphanRemoval = true)
+	private Set<Appointment> appointments = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -88,6 +97,14 @@ public class Exemplary {
 
 	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
+	}
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 	
 
