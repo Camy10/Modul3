@@ -21,10 +21,10 @@ public class AppointmentService {
 		Exemplary exemplary = exemplaryService.getExemplaryById(exemplaryId);
 		User user = userService.getUserById(userId);
 
-//		exemplary.addAppointment(appointment);
-//		user.addAppointment(appointment);
-		appointment.setExemplary(exemplary);
-		appointment.setUser(user);
+		exemplary.addAppointment(appointment);
+		user.addAppointment(appointment);
+		//appointment.setExemplary(exemplary);
+		//appointment.setUser(user);
 		return appointmentRepository.saveAndFlush(appointment);
 	}
 

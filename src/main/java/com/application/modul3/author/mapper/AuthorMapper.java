@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.application.modul3.author.Author;
-import com.application.modul3.author.dto.AuthorCreateDTO;
 import com.application.modul3.author.dto.AuthorDTO;
 
 @Service
@@ -25,8 +24,7 @@ public class AuthorMapper {
 
 	public Author authorDTO2Author(AuthorDTO authorDTO) {
 		Author author = new Author();
-		author.setId(authorDTO.getId());
-		author.setName(author.getName());
+		author.setName(authorDTO.getName());
 		author.setBirthDate(authorDTO.getBirthDate());
 		author.setDeathDate(authorDTO.getDeathDate());
 		author.setGender(authorDTO.getGender());
@@ -43,27 +41,7 @@ public class AuthorMapper {
 		return authorListDTO.stream().map(authorDTO -> authorDTO2Author(authorDTO)).collect(Collectors.toList());
 	}
 
-	public Author author2authorCreateDTO(Author author) {
-		AuthorCreateDTO authorCreateDTO = new AuthorCreateDTO();
-		author.setId(authorCreateDTO.getId());
-		author.setName(authorCreateDTO.getName());
-		author.setBirthDate(authorCreateDTO.getBirthDate());
-		author.setDeathDate(authorCreateDTO.getDeathDate());
-		author.setGender(author.getGender());
-		author.setNationality(author.getNationality());
-		
-		return author;
-	}
-	public Author authorCreateDTO2Author(AuthorCreateDTO authorCreateDTO) {
-		Author author = new Author();
-		authorCreateDTO.setId(author.getId());
-		authorCreateDTO.setName(author.getName());
-		authorCreateDTO.setBirthDate(author.getBirthDate());
-		authorCreateDTO.setDeathDate(author.getDeathDate());
-		authorCreateDTO.setGender(author.getGender());
-		authorCreateDTO.setNationality(author.getNationality());
-		authorCreateDTO.setBooksId(author.getBookIDS());
-		return author;
-	}
+	
+
 
 }

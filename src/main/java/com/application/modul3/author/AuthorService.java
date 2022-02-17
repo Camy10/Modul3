@@ -12,21 +12,12 @@ public class AuthorService {
 	@Autowired
 	private AuthorRepository authorRepository;
 
-	// incercare
-	// @Autowired BookService bookService;
 
 	// crearea si salvarea unui autor in db
 	public Author createAuthor(Author author) {
 		return authorRepository.saveAndFlush(author);
 	}
 
-//	public Author createAuthor(Author author, Set<Integer> booksId) {
-//		Set<Book> books = bookService.getBooksWithId(booksId);	
-//		for (Book book : books) {
-//			author.addBook(book);	
-//		}	
-//		return authorRepository.save(author);
-//	}
 
 	// obtinerea tuturor autorilor
 	public List<Author> getAllAuthor() {

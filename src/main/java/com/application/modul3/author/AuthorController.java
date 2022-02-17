@@ -20,6 +20,7 @@ import com.application.modul3.author.mapper.AuthorMapper;
 public class AuthorController {
 	@Autowired
 	private AuthorService authorService;
+	@Autowired
 	private AuthorMapper authorMapper;
 	// CRUD
 	/*
@@ -27,41 +28,35 @@ public class AuthorController {
 	 */
 
 	@PostMapping
-	public Author createAuthor(@RequestBody Author author) {
-		return authorService.createAuthor(author);
+	public AuthorDTO createAuthor(@RequestBody AuthorDTO authorDTO) {
+		Author aut = authorService.createAuthor(authorMapper.authorDTO2Author(authorDTO));
+		return authorMapper.author2AuthorDTO(aut);
 	}
 
-//	@PostMapping
-//	public AuthorDTO createAuthor(@RequestBody AuthorCreateDTO authorCreateDTO) {
-//		Author author = authorService.createAuthor(authorMapper.authorCreateDTO2Author(authorCreateDTO), authorCreateDTO.getBooksId());
-//		return authorMapper.author2AuthorDTO(author);
-//		//return authorService.createAuthor(author);
-//	}
-
 	@GetMapping("/list")
-	public List<Author> getAllAuthor() {
-		return authorService.getAllAuthor();
-
+	public List<AuthorDTO> getAllAuthor() {
+		return authorMapper.authorList2AuthorListDTO(authorService.getAllAuthor());
 	}
 
 	@GetMapping("/{id}")
-	public Author getAuthorById(@PathVariable Integer id) {
-		return authorService.getAuthorById(id);
+	public AuthorDTO getAuthorById(@PathVariable Integer id) {
+		return authorMapper.author2AuthorDTO(authorService.getAuthorById(id));
 	}
 
 	@GetMapping("/byName")
-	public Author getAuthorByname(@RequestParam String name) {
-		return authorService.getAuthorByName(name);
+	public AuthorDTO getAuthorByname(@RequestParam String name) {
+		return authorMapper.author2AuthorDTO(authorService.getAuthorByName(name));
 	}
 
 	@GetMapping("/live")
-	public List<Author> getAuthorWhoLive() {
-		return authorService.getAuthorWhoLive();
+	public List<AuthorDTO> getAuthorWhoLive() {
+		return authorMapper.authorList2AuthorListDTO(authorService.getAuthorWhoLive());
 	}
 
 	@PutMapping("/{id}")
-	public Author updateAuthor(@RequestBody Author author, @PathVariable Integer id) {
-		return authorService.updateAuthorById(author, id);
+	public AuthorDTO updateAuthor(@RequestBody AuthorDTO authorDTO, @PathVariable Integer id) {
+		Author author = authorService.updateAuthorById(authorMapper.authorDTO2Author(authorDTO), id);
+		return authorMapper.author2AuthorDTO(author);
 	}
 
 	@DeleteMapping("/{id}")

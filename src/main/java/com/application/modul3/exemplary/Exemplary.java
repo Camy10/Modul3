@@ -106,6 +106,11 @@ public class Exemplary {
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
 	}
+
+	public void addAppointment(Appointment appointment) {
+		this.appointments.add(appointment);
+		appointment.setExemplary(this);	
+	}
 	
 
 	

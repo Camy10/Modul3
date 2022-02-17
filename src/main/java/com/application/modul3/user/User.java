@@ -34,7 +34,7 @@ public class User {
 	@Column(name = "address")
 	private String address;
 	
-	@OneToMany(mappedBy = "", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
 	private Set<Appointment> appointments = new HashSet<>();
 	
@@ -74,6 +74,10 @@ public class User {
 	}
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
+	}
+	public void addAppointment(Appointment appointment) {
+		this.appointments.add(appointment);
+		appointment.setUser(this);	
 	}
 	
 	
