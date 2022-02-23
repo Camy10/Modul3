@@ -48,10 +48,10 @@ public class ExemplaryService {
 		 * = book.id WHERE book.id = :bookId
 		 */
 	}
-	
-	public List<Exemplary> findExemplaryByPublisherId(Integer publisherId){
+
+	public List<Exemplary> findExemplaryByPublisherId(Integer publisherId) {
 		return exemplaryRepository.findExemplariesByPublisherId(publisherId);
-		
+
 	}
 
 	public List<Exemplary> getAllExemplary() {

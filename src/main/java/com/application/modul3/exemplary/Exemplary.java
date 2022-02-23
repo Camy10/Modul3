@@ -19,7 +19,7 @@ import com.application.modul3.Appointment.Appointment;
 import com.application.modul3.book.Book;
 import com.application.modul3.publisher.Publisher;
 
-@Entity
+@Entity(name="exemplary")
 @Table(name = "exemplary", schema = "administration")
 public class Exemplary {
 

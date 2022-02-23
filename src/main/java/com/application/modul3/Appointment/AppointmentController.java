@@ -1,25 +1,61 @@
 package com.application.modul3.Appointment;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.modul3.Appointment.dto.AppointmentCreateDTO;
+import com.application.modul3.Appointment.dto.AppointmentDTO;
 import com.application.modul3.Appointment.mapper.AppointmentMapper;
+import com.application.modul3.exemplary.Exemplary;
+import com.application.modul3.exemplary.dto.ExemplaryDTO;
+import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
 @RestController
 @RequestMapping("/appointments")
 public class AppointmentController {
 	@Autowired
-	AppointmentService appointmentService;
+	private AppointmentService appointmentService;
 	@Autowired
-	AppointmentMapper appointmentMapper;
+	private AppointmentMapper appointmentMapper;
+	@Autowired
+	private ExemplaryMapper exemplaryMapper;
 
 	@PostMapping()
-	public Appointment createAppointment(@RequestBody AppointmentCreateDTO appointmentDTO) {
-		return appointmentService.createAppointment(appointmentMapper.appointmentCreateDTO2Appointment(appointmentDTO),
-				appointmentDTO.getUserId(), appointmentDTO.getExemplaryId());
+	public AppointmentDTO createAppointment(@RequestBody AppointmentCreateDTO appointmentCreateDTO) {
+		Appointment app = appointmentService.createAppointment(
+				appointmentMapper.appointmentCreateDTO2Appointment(appointmentCreateDTO),
+				appointmentCreateDTO.getUserId(), appointmentCreateDTO.getExemplaryId());
+		return appointmentMapper.appointment2AppointmentDTO(app);
 	}
+
+	/*
+	 * creez un appointment unde ii dau in path userId si xemplaryId
+	 */
+	@PostMapping("/{userId}/{exemplaryId}")
+	public AppointmentDTO createApp(@RequestBody AppointmentCreateDTO appointmentDTO, @PathVariable Integer userId,
+			@PathVariable Integer exemplaryId) {
+		 Appointment ap =  appointmentService.createAppointment(appointmentMapper.appointmentCreateDTO2Appointment(appointmentDTO),
+				userId, exemplaryId);		 
+		  return appointmentMapper.appointment2AppointmentDTO(ap);
+	}
+
+	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
+	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
+			@PathVariable Integer bookId) {
+		
+		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate), LocalDate.parse(endDate), bookId);
+		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
+	}
+	
+
+	
+
 }

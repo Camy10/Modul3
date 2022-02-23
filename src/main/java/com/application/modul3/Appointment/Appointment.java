@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -77,7 +76,5 @@ public class Appointment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
+		
 }
