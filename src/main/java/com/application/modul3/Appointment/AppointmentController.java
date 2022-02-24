@@ -42,20 +42,26 @@ public class AppointmentController {
 	@PostMapping("/{userId}/{exemplaryId}")
 	public AppointmentDTO createApp(@RequestBody AppointmentCreateDTO appointmentDTO, @PathVariable Integer userId,
 			@PathVariable Integer exemplaryId) {
-		 Appointment ap =  appointmentService.createAppointment(appointmentMapper.appointmentCreateDTO2Appointment(appointmentDTO),
-				userId, exemplaryId);		 
-		  return appointmentMapper.appointment2AppointmentDTO(ap);
+		Appointment ap = appointmentService.createAppointment(
+				appointmentMapper.appointmentCreateDTO2Appointment(appointmentDTO), userId, exemplaryId);
+		return appointmentMapper.appointment2AppointmentDTO(ap);
 	}
 
 	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
 	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
 			@PathVariable Integer bookId) {
-		
-		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate), LocalDate.parse(endDate), bookId);
+
+		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate),
+				LocalDate.parse(endDate), bookId);
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
 	}
-	
 
+	//tr returnat o List<AppointmentDTO>
+	@GetMapping("/list")
+	public List<Appointment> getAllAppointment() {
+		return appointmentService.gettAllAppointment();
+	}
+	
 	
 
 }

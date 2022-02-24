@@ -27,7 +27,8 @@ public class StudentService {
 	}
 
 	public Student getStudentById(Integer studentId) {
-		return studentRepository.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("ceva"));
+		return studentRepository.findById(studentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Student not found with id " +studentId));
 	}
 
 	public Student updateStudent(Student student, Integer studentId) {

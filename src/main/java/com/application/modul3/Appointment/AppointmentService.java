@@ -18,7 +18,7 @@ public class AppointmentService {
 	private AppointmentRepository appointmentRepository;
 	@Autowired
 	private ExemplaryService exemplaryService;
-	@Autowired 
+	@Autowired
 	private ExemplaryRepository exemplaryRepository;
 	@Autowired
 	private UserService userService;
@@ -28,8 +28,8 @@ public class AppointmentService {
 		User user = userService.getUserById(userId);
 		exemplary.addAppointment(appointment);
 		user.addAppointment(appointment);
-		//appointment.setExemplary(exemplary);
-		//appointment.setUser(user);
+		// appointment.setExemplary(exemplary);
+		// appointment.setUser(user);
 		return appointmentRepository.saveAndFlush(appointment);
 	}
 
@@ -37,4 +37,7 @@ public class AppointmentService {
 		return exemplaryRepository.getExemplariesForUserAndPeriod(dateFrom, dateUntil, bookId);
 	}
 
+	public List<Appointment> gettAllAppointment() {
+		return appointmentRepository.findAll();
+	}
 }

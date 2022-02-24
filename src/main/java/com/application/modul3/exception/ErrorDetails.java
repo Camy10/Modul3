@@ -7,14 +7,14 @@ public class ErrorDetails {
 	private Integer status;
 	private String error;
 	private String message;
-	private String path;
+	
 
-	public ErrorDetails(Date timestamp, Integer status, String error, String message, String path) {
+	public ErrorDetails(Date timestamp, Integer status, String error, String message) {
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
 		this.message = message;
-		this.path = path;
+	
 	}
 
 	public Date getTimestamp() {
@@ -33,13 +33,6 @@ public class ErrorDetails {
 		this.message = message;
 	}
 
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
 
 	public Integer getStatus() {
 		return status;
