@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,13 +56,25 @@ public class AppointmentController {
 				LocalDate.parse(endDate), bookId);
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
 	}
+	
+	//nu este testata
+	@GetMapping("/find/{startDate}/{endDate}/publisherByName/")
+	public List<ExemplaryDTO> findFreeExemplariesByPublisher(@PathVariable String startDate, @PathVariable String endDate,
+			@PathVariable String publisherByName) {
 
-	//tr returnat o List<AppointmentDTO>
-	@GetMapping("/list")
-	public List<Appointment> getAllAppointment() {
-		return appointmentService.gettAllAppointment();
+		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplariesByPublisher(LocalDate.parse(startDate),
+				LocalDate.parse(endDate), publisherByName);
+		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
 	}
-	
-	
+
+	@GetMapping("/list")
+	public List<AppointmentDTO> getAllAppointment() {
+		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentService.gettAllAppointment());
+	}
+
+	@GetMapping("/{userId}")
+	public List<AppointmentDTO> findAppointmentByUserId(@PathVariable Integer userId) {
+		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentService.findAppointmnetByUserId(userId));
+	}
 
 }

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.user.User;
 
-@Entity
+@Entity(name = "appointment")
 @Table(name = "appointment", schema = "administration")
 public class Appointment {
 	

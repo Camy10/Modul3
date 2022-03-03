@@ -17,6 +17,21 @@ public interface ExemplaryRepository extends JpaRepository<Exemplary, Integer> {
 			+ "(SELECT ex.id FROM appointment ap JOIN ap.exemplary ex WHERE ?1 <= ap.dateUntil "
 			+ "AND ?2 >= ap.dateFrom)" + "AND (book.id = ?3)")
 	List<Exemplary> getExemplariesForUserAndPeriod(LocalDate dateFrom, LocalDate dateUntil, Integer bookId);
+	
+	
+	/*
+	 * SELECT * FROM administration.exemplary AS ex
+	 * INNER JOIN administration.book AS b ON ex.book_id = b.id 
+	 *INNER JOIN administration.publisher AS p ON ex.publisher_id = p.id 
+	 *INNER JOIN administration.appointment As ap ON ex.id = ap.exemplar_id WHERE p.name ='Litera' AND conditia de intervale
+	 */
+	@Query(value = "SELECT DISTINCT exemplary FROM exemplary exemplary inner join exemplary.publisher publisher left"
+			+" join exemplary.book book "
+			+ " join exemplary.appointments appointment WHERE exemplary.id NOT IN "
+			+ "(SELECT ex.id FROM appointment ap JOIN ap.exemplary ex WHERE ?1 <= ap.dateUntil "
+			+ "AND ?2 >= ap.dateFrom)" + "AND (publisher.name = ?3)")
+	List<Exemplary> getExemplariesForPublisherAndPeriod(LocalDate dateFrom, LocalDate dateUntil,
+			String publisherByName);
 
 	
 }
