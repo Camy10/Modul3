@@ -1,6 +1,7 @@
 package com.application.modul3.Appointment;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +59,11 @@ public class AppointmentController {
 	}
 	
 	//nu este testata
-	@GetMapping("/find/{startDate}/{endDate}/publisherByName/")
+	@GetMapping("/find/{startDate}/{endDate}/ByName")
 	public List<ExemplaryDTO> findFreeExemplariesByPublisher(@PathVariable String startDate, @PathVariable String endDate,
 			@PathVariable String publisherByName) {
 
+		
 		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplariesByPublisher(LocalDate.parse(startDate),
 				LocalDate.parse(endDate), publisherByName);
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
@@ -72,9 +74,10 @@ public class AppointmentController {
 		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentService.gettAllAppointment());
 	}
 
-	@GetMapping("/{userId}")
-	public List<AppointmentDTO> findAppointmentByUserId(@PathVariable Integer userId) {
-		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentService.findAppointmnetByUserId(userId));
+	@GetMapping("/list/{userId}")
+	public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
+		List<Appointment> appointmentDBs = new ArrayList<>(appointmentService.getAllAppointmentsForUser(userId));
+		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentDBs);
 	}
 
 }

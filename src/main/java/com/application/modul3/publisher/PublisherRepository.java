@@ -6,4 +6,6 @@ public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
 //	@Query("SELECT publisher FROM publisher publisher inner join publisher.book book WHERE book.id = ?1")
 //	List<Publisher> findPublisersByBookId(Integer bookId);
 
+	public Publisher findByName(String name);
 }
+

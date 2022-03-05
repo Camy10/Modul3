@@ -23,9 +23,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(error, httpStatus);
 	}
 	
-	@ExceptionHandler(DateIsWrong.class)
-	public ResponseEntity<?> handlerStartDateNotFoundException(DateIsWrong exception){
-		return new ResponseEntity<>(exception.getMessage(), HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);	
+	@ExceptionHandler(ValidationException.class)
+	public ResponseEntity<Object> handleValidationException(ValidationException exception) {
+		HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+		ErrorDetails error = new ErrorDetails(LocalDateTime.now(), httpStatus.value(), httpStatus.getReasonPhrase(),
+				exception.getMessage());
+
+		return new ResponseEntity<>(error, httpStatus);
 	}
 
 	// handle global exception

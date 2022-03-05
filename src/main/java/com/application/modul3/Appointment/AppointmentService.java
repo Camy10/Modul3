@@ -3,11 +3,13 @@ package com.application.modul3.Appointment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.application.modul3.exception.DateIsWrong;
+import com.application.modul3.exception.ResourceNotFoundException;
+import com.application.modul3.exception.ValidationException;
 import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.exemplary.ExemplaryRepository;
 import com.application.modul3.exemplary.ExemplaryService;
@@ -21,42 +23,50 @@ public class AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 	@Autowired
-	private ExemplaryService exemplaryService;
-	@Autowired
 	private ExemplaryRepository exemplaryRepository;
+	
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
 
 	public Appointment createAppointment(Appointment appointment, Integer userId, Integer exemplaryId) {
-		Exemplary exemplary = exemplaryService.getExemplaryById(exemplaryId);
-		User user = userService.getUserById(userId);
+		if(appointment.getDateFrom().isAfter(appointment.getDateUntil())){
+			throw new ValidationException("End date of the appointment is after start date");
+			}
+		
+		Exemplary exemplary = exemplaryRepository.findById(exemplaryId)
+				.orElseThrow(() -> new ResourceNotFoundException("Exemplary not found"));
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		
+		if (!findFreeExemplaries(appointment.getDateFrom(), appointment.getDateUntil(), exemplary.getBook().getId())
+				.contains(exemplary)) {
+			throw new ValidationException("The exemplary was reserved by somebody else");
+		}
 		exemplary.addAppointment(appointment);
 		user.addAppointment(appointment);
-		// appointment.setExemplary(exemplary);
-		// appointment.setUser(user);
+
 		return appointmentRepository.saveAndFlush(appointment);
 	}
 
 	public List<Exemplary> findFreeExemplaries(LocalDate dateFrom, LocalDate dateUntil, Integer bookId) {
 		LocalDate curentdate = LocalDate.now();
 		if (dateFrom.isAfter(dateUntil)) {
-			throw new DateIsWrong("Change the end date");
+			throw new ValidationException("Change the end date");
 		} else if (dateFrom.equals(curentdate) || (dateFrom.isAfter(curentdate))) {
 			return exemplaryRepository.getExemplariesForUserAndPeriod(dateFrom, dateUntil, bookId);
 		}
-		throw new DateIsWrong("Change the start date");
+		throw new ValidationException("Change the start date");
 	}
+
 
 	public List<Appointment> gettAllAppointment() {
 		return appointmentRepository.findAll();
 	}
-
-	//user-ul vrea sa-si vada toate comenzile
-	public List<Appointment> findAppointmnetByUserId(Integer userId) {
-		// User user = userService.getUserById(userId);
-		// user.getAppointments();
-		return appointmentRepository.getAllAppWithUserId(userId);
+	
+	public Set<Appointment> getAllAppointmentsForUser(Integer userId) {
+		return appointmentRepository.findByUser(userId);
 	}
+
 
 	public List<Exemplary> findFreeExemplariesByPublisher(LocalDate dateFrom, LocalDate dateUntil, String publisherByName) {
 	

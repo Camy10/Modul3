@@ -1,9 +1,9 @@
 package com.application.modul3.exception;
 
-public class DateIsWrong extends RuntimeException {
+public class ValidationException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
-	public DateIsWrong(String ms) {
+	public ValidationException(String ms) {
 		super(ms);
 	}
 }

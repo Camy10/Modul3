@@ -44,6 +44,11 @@ public class PublisherController {
 	public PublisherDTO getPublisherById(@PathVariable Integer id) {
 		return publisherMapper.publisher2PublisherDTO(publisherService.getPublisherById(id));
 	}
+	
+	@GetMapping("/name")
+	public PublisherDTO getPublisherByName(@PathVariable String name) {
+		return publisherMapper.publisher2PublisherDTO(publisherService.getPublisherByName(name));
+	}
 
 	@DeleteMapping("/{id}")
 	public void deletePublisherById(@PathVariable Integer id) {

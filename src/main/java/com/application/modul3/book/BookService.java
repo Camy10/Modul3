@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.modul3.author.Author;
 import com.application.modul3.author.AuthorService;
+import com.application.modul3.exception.ResourceNotFoundException;
 
 @Service
 public class BookService {
@@ -42,11 +43,8 @@ public class BookService {
 	// obtinem o inregistare dupa id
 	public Book getBookById(Integer id) {
 		// declaram o carte optionala ca fiind cartea cu id- specificat
-		Optional<Book> bookOpt = bookRepository.findById(id);
-		if (bookOpt.isPresent()) {
-			return bookOpt.get();
-		}
-		return null;
+		return bookRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Book not found"));
 	}
 
 	// stergerea unei carte
