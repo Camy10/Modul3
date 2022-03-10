@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
-
-	public List<Book> findByTitle(String title);
+	//findByFirstNameIgnoreCase
+	public List<Book> findByTitleIgnoreCase(String title);
 	public Set<Book> findByIdIn(Set<Integer> booksId);
 }

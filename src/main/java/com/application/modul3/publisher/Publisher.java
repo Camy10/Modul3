@@ -1,18 +1,12 @@
 package com.application.modul3.publisher;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
-import com.application.modul3.book.Book;
-import com.application.modul3.exemplary.Exemplary;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "publisher", schema = "administration")
@@ -27,7 +21,6 @@ public class Publisher {
 
 	@Column(name = "address")
 	private String address;
-
 
 	public Integer getId() {
 		return id;
@@ -65,8 +58,5 @@ public class Publisher {
 //		this.books.add(book);
 //		book.addPublisher(this);
 //	}
-
-	
-	
 
 }

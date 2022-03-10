@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.application.modul3.publisher.dto.PublisherDTO;
 import com.application.modul3.publisher.mapper.PublisherMapper;
@@ -46,8 +47,8 @@ public class PublisherController {
 	}
 	
 	@GetMapping("/name")
-	public PublisherDTO getPublisherByName(@PathVariable String name) {
-		return publisherMapper.publisher2PublisherDTO(publisherService.getPublisherByName(name));
+	public List<PublisherDTO> getPublisherByName(@RequestParam String name) {
+		return publisherMapper.publisherList2PublisherDTOList(publisherService.getPublisherByName(name));
 	}
 
 	@DeleteMapping("/{id}")

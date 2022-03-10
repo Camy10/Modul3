@@ -1,9 +1,7 @@
 package com.application.modul3.book;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +33,19 @@ public class BookService {
 		return bookRepository.save(book);
 	}
 
-	// obtinem toate inre din db
+	// obtinem toate cartile din db
 	public List<Book> getAllBooks() {
 		return bookRepository.findAll();
 	}
 
-	// obtinem o inregistare dupa id
+	// obtinem o carte dupa id
 	public Book getBookById(Integer id) {
-		// declaram o carte optionala ca fiind cartea cu id- specificat
-		return bookRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Book not found"));
+		return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
 	}
 
-	// stergerea unei carte
+	// stergerea unei carti
 	public void deleteBookById(Integer id) {
+		getBookById(id);
 		bookRepository.deleteById(id);
 	}
 
@@ -64,7 +61,9 @@ public class BookService {
 
 	// find a book by title
 	public List<Book> getBookByTitle(String title) {
-		return bookRepository.findByTitle(title);
+
+		return bookRepository.findByTitleIgnoreCase(title.replaceAll("[^a-zA-Z0-9]", "").trim());
+
 	}
 
 	/*
@@ -73,19 +72,12 @@ public class BookService {
 	 */
 	public Book findBookWithAuthorsID(Integer bookId) {
 		Book book = getBookById(bookId);
-		book.getAuthors();
+		// book.getAuthors(); //se intampla by default
 		return book;
 	}
-	
-	public Book findBookWithAuthors(Integer bookId) {
-		Book book = getBookById(bookId);
-		book.getAuthors();
-		return book;
-	}
-
 
 	public Set<Book> getBooksWithId(Set<Integer> booksId) {
-		
+
 		return bookRepository.findByIdIn(booksId);
 	}
 

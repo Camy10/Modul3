@@ -3,7 +3,13 @@ package com.application.modul3.exception;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ErrorDetails {
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDateTime timestamp;
 	private Integer status;
 	private String error;

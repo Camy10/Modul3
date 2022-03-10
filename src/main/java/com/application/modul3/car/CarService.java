@@ -3,6 +3,8 @@ package com.application.modul3.car;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.application.modul3.exception.ResourceNotFoundException;
 import com.application.modul3.person.Person;
 import com.application.modul3.person.PersonService;
 
@@ -24,15 +26,18 @@ public class CarService {
 	}
 
 	public Car getCarById(Integer carId) {
-		Optional<Car> optCar = carRepository.findById(carId);
-		if (optCar.isPresent()) {
-			return optCar.get();
-		}
-		return null;
+//		Optional<Car> optCar = carRepository.findById(carId);
+//		if (optCar.isPresent()) {
+//			return optCar.get();
+//		}
+//		return null;
+		return carRepository.findById(carId)
+				.orElseThrow(()-> new ResourceNotFoundException("Car not fount with id " + carId));
 	}
 	
 	public void deleteCarId(Integer carId) {
 		carRepository.deleteById(carId);
 	}
+	
 
 }

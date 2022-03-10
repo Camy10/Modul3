@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.application.modul3.exception.ResourceNotFoundException;
+
 @Service
 public class UserService {
 
@@ -21,14 +23,17 @@ public class UserService {
 	}
 
 	public User getUserById(Integer id) {
-		Optional<User> userOpt = userRepository.findById(id);
-		if (userOpt.isPresent()) {
-			return userOpt.get();
-		}
-		return null;
+//		Optional<User> userOpt = userRepository.findById(id);
+//		if (userOpt.isPresent()) {
+//			return userOpt.get();
+//		}
+//		return null;
+		return userRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("User not found: "+id));
 	}
 
 	public void deleteUserById(Integer id) {
+		getUserById(id);
 		userRepository.deleteById(id);
 	}
 

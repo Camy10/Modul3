@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.modul3.Appointment.dto.AppointmentCreateDTO;
@@ -57,16 +58,15 @@ public class AppointmentController {
 				LocalDate.parse(endDate), bookId);
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
 	}
-	
-	//nu este testata
-	@GetMapping("/find/{startDate}/{endDate}/ByName")
-	public List<ExemplaryDTO> findFreeExemplariesByPublisher(@PathVariable String startDate, @PathVariable String endDate,
-			@PathVariable String publisherByName) {
 
-		
-		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplariesByPublisher(LocalDate.parse(startDate),
-				LocalDate.parse(endDate), publisherByName);
-		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(freeExemplaries);
+	// testat
+	@GetMapping("/find/{startDate}/{endDate}/name")
+	public List<ExemplaryDTO> findFreeExemplariesByPublisher(@PathVariable String startDate,
+			@PathVariable String endDate, @RequestParam String name) {
+
+		List<Exemplary> exemplaries = appointmentService.findFreeExemplariesByPublisher(LocalDate.parse(startDate),
+				LocalDate.parse(endDate), name);
+		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(exemplaries);
 	}
 
 	@GetMapping("/list")
@@ -80,4 +80,9 @@ public class AppointmentController {
 		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentDBs);
 	}
 
+	@DeleteMapping("/{appId}")
+	public void deleteApp(@PathVariable Integer appId) {
+		appointmentService.deleteById(appId);
+
+	}
 }

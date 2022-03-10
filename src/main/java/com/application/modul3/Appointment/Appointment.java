@@ -17,24 +17,24 @@ import com.application.modul3.user.User;
 @Entity(name = "appointment")
 @Table(name = "appointment", schema = "administration")
 public class Appointment {
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "date_from")
 	private LocalDate dateFrom;
-	
+
 	@Column(name = "date_until")
 	private LocalDate dateUntil;
-	
+
 	@ManyToOne()
-	@JoinColumn (name = "exemplar_id")
+	@JoinColumn(name = "exemplar_id")
 	private Exemplary exemplary;
-	
+
 	@ManyToOne()
-	@JoinColumn (name = "user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Integer getId() {
@@ -76,5 +76,5 @@ public class Appointment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-		
+
 }

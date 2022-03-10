@@ -72,4 +72,8 @@ public class AppointmentService {
 	
 		return exemplaryRepository.getExemplariesForPublisherAndPeriod(dateFrom, dateUntil, publisherByName);
 	}
+	
+	public void deleteById(Integer appId) {
+		appointmentRepository.deleteById(appId);	
+	}
 }

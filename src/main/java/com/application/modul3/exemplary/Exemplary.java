@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,17 +39,16 @@ public class Exemplary {
 	private Integer pageNumbers;
 
 	// entitatea copil
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "book_id")
-	// @JsonIgnoreProperties("exemplaries")
 	private Book book;
 	
-	@ManyToOne
+	@ManyToOne //by defaul eager
 	@JoinColumn(name = "publisher_id")
 	private Publisher publisher;
 	
 	@OneToMany(mappedBy = "exemplary", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.REMOVE }, orphanRemoval = true)
+			CascadeType.REMOVE }, orphanRemoval = true)		
 	private Set<Appointment> appointments = new HashSet<>();
 
 	public Integer getId() {

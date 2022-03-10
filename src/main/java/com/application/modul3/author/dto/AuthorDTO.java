@@ -2,7 +2,10 @@ package com.application.modul3.author.dto;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.application.modul3.gender.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AuthorDTO {
 	private Integer id;
@@ -25,12 +28,18 @@ public class AuthorDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	public LocalDate getDeathDate() {
 		return deathDate;
 	}

@@ -38,7 +38,7 @@ public class User {
 //	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 //			CascadeType.REMOVE }, orphanRemoval = true)
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.REMOVE }, orphanRemoval = true)
+			CascadeType.REMOVE }, orphanRemoval = true)	
 	private Set<Appointment> appointments = new HashSet<>();
 	
 	
