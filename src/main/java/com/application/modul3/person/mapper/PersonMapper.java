@@ -3,13 +3,14 @@ package com.application.modul3.person.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.application.modul3.person.Person;
 import com.application.modul3.person.dto.PersonCreateDTO;
 import com.application.modul3.person.dto.PersonDTO;
 
-@Service
+@Component
 public class PersonMapper {
 
 	public Person personCreateDTO2person(PersonCreateDTO personCreateDTO) {

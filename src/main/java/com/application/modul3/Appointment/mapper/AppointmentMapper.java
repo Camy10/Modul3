@@ -2,14 +2,14 @@ package com.application.modul3.Appointment.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import com.application.modul3.Appointment.Appointment;
 import com.application.modul3.Appointment.dto.AppointmentCreateDTO;
 import com.application.modul3.Appointment.dto.AppointmentDTO;
 
 
 
-@Service
+@Component
 public class AppointmentMapper {
 
 	public Appointment appointmentCreateDTO2Appointment(AppointmentCreateDTO appointmentCreateDTO) {

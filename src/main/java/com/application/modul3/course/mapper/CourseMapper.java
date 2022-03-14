@@ -3,13 +3,12 @@ package com.application.modul3.course.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import com.application.modul3.course.Course;
 import com.application.modul3.course.dto.CourseCreateDTO;
 import com.application.modul3.course.dto.CourseDTO;
 
-@Service
+@Component
 public class CourseMapper {
 	public Course CourseCreateDTO2Course(CourseCreateDTO courseCreateDTO) {
 		Course course = new Course();

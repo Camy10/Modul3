@@ -10,19 +10,12 @@ import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
 
 //DTO - Data Transfer Object -> arata 1:1 ca si campuri cu entitatile pe care le folosim la BD
 public class BookCreateDTO {
-	private Integer id;
+	
 	private String title;
 	private LocalDate year;
 	private String isbn;
 	private Set<Integer> authorIds = new HashSet<>();
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getTitle() {
 		return title;

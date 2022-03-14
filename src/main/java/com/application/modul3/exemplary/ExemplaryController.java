@@ -17,7 +17,7 @@ import com.application.modul3.exemplary.dto.ExemplaryDTO;
 import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
 @RestController
-@RequestMapping("/exemplary")
+@RequestMapping("/exemplaries")
 public class ExemplaryController {
 
 	@Autowired

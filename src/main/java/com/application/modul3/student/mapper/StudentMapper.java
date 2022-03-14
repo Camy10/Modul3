@@ -3,13 +3,14 @@ package com.application.modul3.student.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.application.modul3.student.Student;
 import com.application.modul3.student.dto.StudentCreateDTO;
 import com.application.modul3.student.dto.StudentDTO;
 
-@Service
+@Component
 public class StudentMapper {
 
 	public Student studentCreateDTO2Student(StudentCreateDTO studentCreateDTO) {

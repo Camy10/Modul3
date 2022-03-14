@@ -2,14 +2,12 @@ package com.application.modul3.user.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import com.application.modul3.user.User;
 import com.application.modul3.user.dto.UserCreateDTO;
 import com.application.modul3.user.dto.UserDTO;
 
-@Service
+@Component
 public class UserMapper {
 	
 	public User userCreateDTO2User(UserCreateDTO userCreateDTO) {

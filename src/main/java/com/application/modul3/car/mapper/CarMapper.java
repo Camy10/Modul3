@@ -1,12 +1,13 @@
 package com.application.modul3.car.mapper;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 import com.application.modul3.car.Car;
 import com.application.modul3.car.dto.CarCreateDTO;
 import com.application.modul3.car.dto.CarDTO;
 
-@Service
+@Component
 public class CarMapper {
 
 	public Car carCreateDTO2Car(CarCreateDTO carCreateDTO) {

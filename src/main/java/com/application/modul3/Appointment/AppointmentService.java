@@ -30,7 +30,7 @@ public class AppointmentService {
 
 	public Appointment createAppointment(Appointment appointment, Integer userId, Integer exemplaryId) {
 		if(appointment.getDateFrom().isAfter(appointment.getDateUntil())){
-			throw new ValidationException("End date of the appointment is after start date");
+			throw new ValidationException("End date of the appointment is before start date");
 			}
 		
 		Exemplary exemplary = exemplaryRepository.findById(exemplaryId)

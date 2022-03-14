@@ -3,12 +3,13 @@ package com.application.modul3.publisher.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.application.modul3.publisher.Publisher;
 import com.application.modul3.publisher.dto.PublisherDTO;
 
-@Service
+@Component
 public class PublisherMapper {
 
 	public PublisherDTO publisher2PublisherDTO(Publisher publisher) {

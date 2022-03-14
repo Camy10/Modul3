@@ -28,6 +28,7 @@ public class BookController {
 	@Autowired
 	private BookMapper bookMapper;
 
+	//parametru e de tip BookCreateDTO
 	@PostMapping
 	public BookDTO createBook(@RequestBody BookDTO bookDTO) {
 		Book createBook = bookService.createBook(bookMapper.bookDTO2Book(bookDTO));
@@ -56,6 +57,7 @@ public class BookController {
 		bookService.deleteBookById(id);
 	}
 
+	//bookDTO
 	@PutMapping("/{id}")
 	public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
 		return bookService.updateBook(book, id);
