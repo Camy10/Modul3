@@ -1,7 +1,5 @@
 package com.application.modul3.Appointment.dto;
-
 import java.time.LocalDate;
-
 public class AppointmentCreateDTO {
 
 	private LocalDate dateFrom;

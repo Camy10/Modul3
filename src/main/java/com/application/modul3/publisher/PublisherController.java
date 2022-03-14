@@ -23,18 +23,12 @@ public class PublisherController {
 	@Autowired
 	private PublisherMapper publisherMapper;
 
-
 	@PostMapping()
 	public PublisherDTO createPublisher(@RequestBody PublisherDTO publisherDTO) {
 		Publisher createPublisher = publisherService
 				.createPublisher(publisherMapper.publisherDTO2Publisher(publisherDTO));
 		return publisherMapper.publisher2PublisherDTO(createPublisher);
 	}
-
-//	@PostMapping("/add/book/{bookId}/{publisherId}")
-//	public void setPublisher(@PathVariable Integer bookId, @PathVariable Integer publisherId) {
-//		publisherService.setPublisherBook(publisherId, bookId);
-//	}
 
 	@GetMapping("/list")
 	public List<PublisherDTO> getAllPublisher() {
@@ -45,7 +39,7 @@ public class PublisherController {
 	public PublisherDTO getPublisherById(@PathVariable Integer id) {
 		return publisherMapper.publisher2PublisherDTO(publisherService.getPublisherById(id));
 	}
-	
+
 	@GetMapping("/name")
 	public List<PublisherDTO> getPublisherByName(@RequestParam String name) {
 		return publisherMapper.publisherList2PublisherDTOList(publisherService.getPublisherByName(name));

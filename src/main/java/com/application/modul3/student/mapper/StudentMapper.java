@@ -2,10 +2,7 @@ package com.application.modul3.student.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.application.modul3.student.Student;
 import com.application.modul3.student.dto.StudentCreateDTO;
 import com.application.modul3.student.dto.StudentDTO;
@@ -29,13 +26,13 @@ public class StudentMapper {
 		studentDTO.setPhone(student.getPhone());
 		return studentDTO;
 	}
-	
+
 	public Student studentDTO2Student(StudentDTO studentDTO) {
 		Student student = new Student();
 		student.setName(studentDTO.getName());
 		student.setMail(studentDTO.getMail());
 		student.setPhone(studentDTO.getPhone());
-		return student;	
+		return student;
 	}
 
 	public List<StudentDTO> studentList2StudentDTOList(List<Student> students) {

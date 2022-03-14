@@ -27,7 +27,7 @@ public class UserController {
 
 	// build create user Rest API
 	@PostMapping
-	public UserDTO createUser(@RequestBody UserCreateDTO userCreateDTO){
+	public UserDTO createUser(@RequestBody UserCreateDTO userCreateDTO) {
 		User user = userService.createUser(userMapper.userCreateDTO2User(userCreateDTO));
 		return userMapper.user2UserDTO(user);
 	}

@@ -1,7 +1,6 @@
 package com.application.modul3.Appointment;
 
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.user.User;
 

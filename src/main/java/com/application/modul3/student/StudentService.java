@@ -1,13 +1,12 @@
 
 package com.application.modul3.student;
+
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.application.modul3.course.Course;
 import com.application.modul3.course.CourseService;
 import com.application.modul3.exception.ResourceNotFoundException;
-
 
 @Service
 public class StudentService {
@@ -28,7 +27,7 @@ public class StudentService {
 
 	public Student getStudentById(Integer studentId) {
 		return studentRepository.findById(studentId)
-				.orElseThrow(() -> new ResourceNotFoundException("Student not found with id " +studentId));
+				.orElseThrow(() -> new ResourceNotFoundException("Student not found with id " + studentId));
 	}
 
 	public Student updateStudent(Student student, Integer studentId) {

@@ -30,8 +30,8 @@ public class BookController {
 
 	//parametru e de tip BookCreateDTO
 	@PostMapping
-	public BookDTO createBook(@RequestBody BookDTO bookDTO) {
-		Book createBook = bookService.createBook(bookMapper.bookDTO2Book(bookDTO));
+	public BookDTO createBook(@RequestBody BookCreateDTO bookCreateDTO) {
+		Book createBook = bookService.createBook(bookMapper.bookCreateDTO2Book(bookCreateDTO));
 		return bookMapper.book2BookDTO(createBook);
 	}
 
@@ -59,8 +59,8 @@ public class BookController {
 
 	//bookDTO
 	@PutMapping("/{id}")
-	public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
-		return bookService.updateBook(book, id);
+	public BookDTO updateBook(@RequestBody BookDTO bookDTO, @PathVariable Integer id) {	
+		return bookMapper.book2BookDTO(bookService.updateBook(bookMapper.bookDTO2Book(bookDTO), id));
 	}
 
 	@GetMapping("/title/name")

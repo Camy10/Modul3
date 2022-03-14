@@ -2,10 +2,7 @@ package com.application.modul3.author.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.application.modul3.author.Author;
 import com.application.modul3.author.dto.AuthorDTO;
 
@@ -41,8 +38,5 @@ public class AuthorMapper {
 	public List<Author> authorListDTO2AuthorList(List<AuthorDTO> authorListDTO) {
 		return authorListDTO.stream().map(authorDTO -> authorDTO2Author(authorDTO)).collect(Collectors.toList());
 	}
-
-	
-
 
 }

@@ -26,7 +26,6 @@ public class ExemplaryController {
 	@Autowired
 	private ExemplaryMapper exemplaryMapper;
 
-
 	// la exemplar creat ii add o cartea si o editura
 	@PostMapping("/add/{bookId}/{publisherId}")
 	public ResponseEntity<Object> createExemplary(@PathVariable Integer bookId, @PathVariable Integer publisherId,
@@ -49,11 +48,11 @@ public class ExemplaryController {
 	public List<ExemplaryDTO> findExemplaryByBookId(@PathVariable Integer bookId) {
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(exemplaryService.findExemplariesByBookId(bookId));
 	}
-	
+
 	@GetMapping("/list/publisher/{publisherId}")
-	public List<ExemplaryDTO> findExemplaryByPublisgerId(@PathVariable Integer publisherId){
+	public List<ExemplaryDTO> findExemplaryByPublisgerId(@PathVariable Integer publisherId) {
 		return exemplaryMapper.exemplaryList2ExemplaryDTOlist(exemplaryService.findExemplaryByPublisherId(publisherId));
-		
+
 	}
 
 	@DeleteMapping("/delete/{exemplaryId}")
@@ -74,7 +73,6 @@ public class ExemplaryController {
 		return exemplaryMapper.exemplary2ExemplaryDTO(exemplaryService.getExemplaryById(id));
 	}
 
-	// nu merge
 	@PutMapping("/{id}")
 	public ExemplaryDTO updateExemplary(@RequestBody Exemplary exemplary, @PathVariable Integer id) {
 		return exemplaryMapper.exemplary2ExemplaryDTO(exemplaryService.updateExemplary(exemplary, id));

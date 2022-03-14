@@ -18,8 +18,6 @@ import javax.persistence.Table;
 import com.application.modul3.author.Author;
 import com.application.modul3.exemplary.Exemplary;
 
-import net.bytebuddy.dynamic.scaffold.MethodRegistry.Handler.ForAbstractMethod;
-
 @Entity
 @Table(name = "book", schema = "administration")
 public class Book {

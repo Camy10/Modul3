@@ -1,11 +1,7 @@
 package com.application.modul3.student;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.application.modul3.exception.ResourceNotFoundException;
-import com.application.modul3.exemplary.Exemplary;
-import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 import com.application.modul3.student.dto.StudentCreateDTO;
 import com.application.modul3.student.dto.StudentDTO;
 import com.application.modul3.student.mapper.StudentMapper;
@@ -28,8 +20,6 @@ import com.application.modul3.student.mapper.StudentMapper;
 @ControllerAdvice
 public class StudentController {
 
-	@Autowired
-	private StudentRepository studentRepository;
 	@Autowired
 	private StudentService studentService;
 
@@ -46,13 +36,6 @@ public class StudentController {
 	public List<StudentDTO> getAllStudent() {
 		return studentMapper.studentList2StudentDTOList(studentService.getAllStudent());
 	}
-
-//	@GetMapping("/{studentId}")
-//	public StudentDTO getStudentById(@PathVariable Integer studentId) {
-//
-//		return studentMapper.student2StudentDTO(studentService.getStudentById(studentId));
-//				
-//	}
 
 	@GetMapping("/{studentId}")
 	public StudentDTO getStudentById(@PathVariable Integer studentId) {

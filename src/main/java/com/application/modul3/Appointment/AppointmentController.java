@@ -35,7 +35,8 @@ public class AppointmentController {
 	public AppointmentDTO createAppointment(@RequestBody AppointmentCreateDTO appointmentCreateDTO) {
 		Appointment app = appointmentService.createAppointment(
 				appointmentMapper.appointmentCreateDTO2Appointment(appointmentCreateDTO),
-				appointmentCreateDTO.getUserId(), appointmentCreateDTO.getExemplaryId());
+		appointmentCreateDTO.getUserId(), appointmentCreateDTO.getExemplaryId());
+		
 		return appointmentMapper.appointment2AppointmentDTO(app);
 	}
 
@@ -77,6 +78,7 @@ public class AppointmentController {
 	@GetMapping("/list/{userId}")
 	public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
 		List<Appointment> appointmentDBs = new ArrayList<>(appointmentService.getAllAppointmentsForUser(userId));
+		
 		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentDBs);
 	}
 

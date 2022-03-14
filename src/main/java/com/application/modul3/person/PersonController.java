@@ -46,7 +46,7 @@ public class PersonController {
 	// person/get/{id} - GET (returneaza o persoana dupa ID)
 	@GetMapping("/{personId}")
 	public PersonDTO getPersonById(@PathVariable Integer personId) {
-		return personMapper.person2PersonDTO(personService.getPersonById(personId)) ;
+		return personMapper.person2PersonDTO(personService.getPersonById(personId));
 	}
 
 	// person/{id} - DELETE (sterge o persoana dupa ID)

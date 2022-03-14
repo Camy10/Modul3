@@ -10,7 +10,7 @@ import com.application.modul3.car.Car;
 public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
-	
+
 	public Person createperson(Person person) {
 		return personRepository.saveAndFlush(person);
 	}
@@ -44,7 +44,7 @@ public class PersonService {
 		Person person = getPersonById(personId);
 		person.getCars();
 		Car car = person.getCarWithId(carId);
-		//Car car = carService.getCarById(carId); imi da dependinta circulara
+		// Car car = carService.getCarById(carId); imi da dependinta circulara
 		person.removeCar(car);
 		personRepository.flush();
 	}

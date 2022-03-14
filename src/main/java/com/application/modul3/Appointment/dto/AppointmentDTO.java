@@ -1,9 +1,6 @@
 package com.application.modul3.Appointment.dto;
-
 import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AppointmentDTO {
@@ -17,6 +14,9 @@ public class AppointmentDTO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDate dateUntil;
+	
+	//
+	private Integer exemplaryId;
 	
 	
 	public Integer getId() {
@@ -37,5 +37,12 @@ public class AppointmentDTO {
 	public void setDateUntil(LocalDate dateUntil) {
 		this.dateUntil = dateUntil;
 	}
+	public Integer getExemplaryId() {
+		return exemplaryId;
+	}
+	public void setExemplaryId(Integer exemplaryId) {
+		this.exemplaryId = exemplaryId;
+	}
+	
 	
 }

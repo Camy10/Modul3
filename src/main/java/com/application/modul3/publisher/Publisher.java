@@ -46,17 +46,4 @@ public class Publisher {
 		this.address = address;
 	}
 
-//	public Set<Book> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(Set<Book> books) {
-//		this.books = books;
-//	}
-//
-//	public void addBook(Book book) {
-//		this.books.add(book);
-//		book.addPublisher(this);
-//	}
-
 }
