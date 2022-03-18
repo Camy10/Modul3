@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.application.modul3.Appointment.Appointment;
@@ -50,6 +51,12 @@ public class Exemplary {
 	@OneToMany(mappedBy = "exemplary", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)		
 	private Set<Appointment> appointments = new HashSet<>();
+	
+	//ca sa putem sterge un exemp, sau facem in asa fel sa nu avem la Book-exemplary (egaer-eager)
+	@PreRemove
+	public void delete() {
+		this.book.removeExemplary(this);
+	}
 
 	public Integer getId() {
 		return id;
