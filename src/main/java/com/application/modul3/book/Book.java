@@ -18,15 +18,15 @@ import javax.persistence.Table;
 import com.application.modul3.author.Author;
 import com.application.modul3.exemplary.Exemplary;
 
-@Entity
-@Table(name = "book", schema = "administration")
+@Entity // the class is a persistent Java class = are capacitatea de a reprezenta obiecte in DB
+@Table(name = "book", schema = "administration") //tab care mapeaza aceasta entity
 public class Book {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id //primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//stategia de generare a PK
 	private Integer id;
 
-	@Column(name = "title")
+	@Column(name = "title") //def coloana din tabel ce mapeaza campul adnotat
 	private String title;
 
 	@Column(name = "year")

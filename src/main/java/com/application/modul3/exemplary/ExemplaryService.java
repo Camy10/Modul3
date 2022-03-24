@@ -37,6 +37,9 @@ public class ExemplaryService {
 	}
 
 	public void deleteExemplary(Integer ExemplaryId) {
+		//ne ajuta sa sterge un exemplar in cazul in care avem Eager-Eager
+//		Exemplary ex = exemplaryRepository.findById(ExemplaryId).get();
+//		ex.getBook().removeExemplary(ex);
 		exemplaryRepository.deleteById(ExemplaryId);
 	}
 
