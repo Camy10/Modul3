@@ -7,15 +7,15 @@ public class AppointmentDTO {
 
 	private Integer id;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDate dateFrom;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalDate dateUntil;
 	
-	//
+	
 	private Integer exemplaryId;
 	
 	

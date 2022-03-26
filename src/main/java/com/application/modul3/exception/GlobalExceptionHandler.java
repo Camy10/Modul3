@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-	// handle sepecific exception
+	// handle specific exception
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<?> handlerStudentNotFoundException(ResourceNotFoundException exception) {
 		// 2 pune LocalDateTime in loc de Date
