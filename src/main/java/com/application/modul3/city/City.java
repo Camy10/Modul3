@@ -57,7 +57,7 @@ public class City {
 	}
 
 	public void removeCitizen(Citizen citizen) {
-		this.citizens.remove(citizen);
+		this.citizens.remove(citizen);	
 		citizen.setCity(null);
 	}
 

@@ -30,7 +30,7 @@ public class Person {
 	private Integer age;
 
 	@OneToMany(mappedBy = "person", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.REMOVE }, orphanRemoval = true)
+			CascadeType.REMOVE }, orphanRemoval = false)
 	private List<Car> cars;
 
 	public Integer getId() {

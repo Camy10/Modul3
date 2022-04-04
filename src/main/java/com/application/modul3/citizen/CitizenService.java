@@ -25,6 +25,8 @@ public class CitizenService {
 		Citizen citizen = citizenRepository.findById(citizenId)
 				.orElseThrow(() -> new ResourceNotFoundException("citizen not found"));
 
+		//city.getCitizen();
+		//citizen.setCity(city);
 		city.removeCitizen(citizen);
 		citizenRepository.flush();
 
